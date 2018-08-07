@@ -134,7 +134,7 @@
 				<active>0</active>
 				<title>Bitcoin and Bitcoin Cash</title>
                 <api_key>test</api_key>
-				<network>livenet</network>
+				<network>https://btcpayjungle.com</network>
 				<order_confirmation>1</order_confirmation>
 				<debug>0</debug>
 				<notification_url>bitpay/ipn</notification_url>

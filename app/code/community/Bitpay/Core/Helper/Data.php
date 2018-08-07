@@ -347,11 +347,7 @@ class Bitpay_Core_Helper_Data extends Mage_Core_Helper_Abstract
             $this->debugData('[INFO] In Bitpay_Core_Helper_Data::getBitpayClient(): successfully created new BitPay Client object.');
         }
 
-        if(\Mage::getStoreConfig('payment/bitpay/network') === 'livenet') {
-          $network = new Bitpay\Network\Livenet();
-        } else {
-          $network = new Bitpay\Network\Testnet();
-        }
+        $network = = new Customnet(\Mage::getStoreConfig('payment/bitpay/network'), 443);
         $adapter = new Bitpay\Client\Adapter\CurlAdapter();
 
         $this->_client->setPublicKey($this->getPublicKey());

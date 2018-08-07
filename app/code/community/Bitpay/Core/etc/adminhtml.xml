@@ -11,14 +11,14 @@
             <admin>
                 <children>
                     <bitpay translate="title" module="bitpay">
-                        <title>BitPay</title>
+                        <title>BtcPayServer</title>
                     </bitpay>
                     <system>
                         <children>
                             <config>
                                 <children>
                                     <bitpay translate="title" module="bitpay">
-                                        <title>BitPay Settings</title>
+                                        <title>BtcPayServer Settings</title>
                                     </bitpay>
                                 </children>
                             </config>
