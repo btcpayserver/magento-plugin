@@ -1,0 +1,94 @@
+<?php
+/**
+ * @license Copyright 2011-2016 BitPay Inc., MIT License
+ * @see https://github.com/bitpay/magento-plugin/blob/master/LICENSE
+ */
+
+$url = $this->getIframeUrl();
+switch($url) {
+    case 'notbtcpay':
+        echo 'Order selected using a different payment method than BTC Pay';
+        break; // customer is using another payment method
+    case 'paid':
+        echo 'Order payment received. Place Order to complete.';
+        break;
+    case 'redirect':
+        echo 'Please click Place Order to continue to pay via BTC Pay.';
+        break;
+    case false:
+        echo 'Error creating invoice. Please try again or try another payment solution.';
+        break;
+    default:
+        // display the BTC pay invoice in an iframe. Currently only 'redirect' is supported, so the below will not be executed
+        echo '<div class="btcpay_invoice_div" style="display:none; width:100%;"></div>';
+        break;
+}
+$quoteId = $this->getQuote()->getId();
+$request = Mage::app()->getRequest();
+$url     = Mage::getUrl('btcpay/index/index/');
+if ($request->getScheme() == 'https') {
+    $url = str_replace('http://', 'https://', $url);
+}
+
+?>
+<script type="text/javascript">
+//<![CDATA[
+if ($$('div.btcpay_invoice_div').length > 0) {
+  var bpListener = {
+    nextStep: function(transport) {
+      if (transport && transport.responseText) {
+        try{
+          response = eval('(' + transport.responseText + ')');
+        }
+        catch (e) {
+          response = {};
+        }
+        if (response.success) {
+          $$('button.btn-checkout')[0].setStyle({display:'none'});
+          var invoice_div = $$('div.btcpay_invoice_div')[0];
+          invoice_div.setStyle({display:'block'});
+          invoice_div.innerHTML = '<iframe class="btcpay_invoice_iframe" src="' + response.redirect + '" style="width:500px; height:150px; overflow:hidden; border:none; display:block; margin:auto; scrolling="no" allowtransparency="true" frameborder="0"></iframe>';
+          var ipnPoller = new PeriodicalExecuter(function() {
+            new Ajax.Request("<?php echo $url . '?quote=' . $quoteId; ?>",
+            {
+              asynchronous: true,
+              evalScripts: true,
+              onComplete: function(request) {
+                var data = request.responseText.evalJSON();
+                if (data.paid) {
+                  ipnPoller.stop();
+                  response.redirect = null;
+                }
+              }
+            });
+          }, 5);
+        } else {
+          var msg = response.error_messages;
+          if (typeof(msg)=='object') {
+            msg = msg.join("\n");
+          }
+          if (msg) {
+            alert(msg);
+          }
+        }
+        if (response.update_section) {
+          $('checkout-'+response.update_section.name+'-load').update(response.update_section.html);
+        }
+        if (response.goto_section) {
+          checkout.gotoSection(response.goto_section, true);
+        }
+      }
+    }
+  };
+  var reviewCheck = new PeriodicalExecuter(function() {
+    if (review) {
+      reviewCheck.stop();
+      var originalSaveHandler = review.onSave;
+      review.onSave = bpListener.nextStep.bindAsEventListener(review);
+    }
+  }, 1);
+}
+//]]>
+</script>
+
+

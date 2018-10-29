@@ -5,7 +5,7 @@
  * @see https://github.com/bitpay/magento-plugin/blob/master/LICENSE
  */
  -->
-<project name="bitpay/magento-plugin" default="build">
+<project name="btcpay/magento-plugin" default="build">
     <!--
         Default properties
     -->
@@ -243,15 +243,15 @@
         environment. This should closely follow the `modman` file.
     -->
     <target name="plugin:symlink" hidden="true">
-        <mkdir dir="${project.basedir}/build/magento/app/code/community/Bitpay" />
+        <mkdir dir="${project.basedir}/build/magento/app/code/community/btcpay" />
         <mkdir dir="${project.basedir}/build/magento/app/design/frontend/base/default/layout" />
         <mkdir dir="${project.basedir}/build/magento/app/design/frontend/base/default/template" />
         <mkdir dir="${project.basedir}/build/magento/app/etc/modules" />
         <mkdir dir="${project.basedir}/build/magento/lib" />
         <mkdir dir="${project.basedir}/build/magento/shell" />
         <symlink
-            target="${project.basedir}/app/code/community/Bitpay/Bitcoins"
-            link="${project.basedir}/build/magento/app/code/community/Bitpay/Bitcoins"
+            target="${project.basedir}/app/code/community/btcpay/Bitcoins"
+            link="${project.basedir}/build/magento/app/code/community/btcpay/Bitcoins"
             overwrite="true" />
         <symlink
             target="${project.basedir}/app/design/frontend/base/default/layout/bitcoins.xml"
@@ -262,16 +262,16 @@
             link="${project.basedir}/build/magento/app/design/frontend/base/default/template/bitcoins"
             overwrite="true" />
         <symlink
-            target="${project.basedir}/app/etc/modules/Bitpay_Bitcoins.xml"
-            link="${project.basedir}/build/magento/app/etc/modules/Bitpay_Bitcoins.xml"
+            target="${project.basedir}/app/etc/modules/btcpay_Bitcoins.xml"
+            link="${project.basedir}/build/magento/app/etc/modules/btcpay_Bitcoins.xml"
             overwrite="true" />
         <symlink
-            target="${project.basedir}/lib/bitpay"
-            link="${project.basedir}/build/magento/lib/bitpay"
+            target="${project.basedir}/lib/btcpay"
+            link="${project.basedir}/build/magento/lib/btcpay"
             overwrite="true" />
         <symlink
-            target="${project.basedir}/shell/bitpay.php"
-            link="${project.basedir}/build/magento/shell/bitpay.php"
+            target="${project.basedir}/shell/btcpay.php"
+            link="${project.basedir}/build/magento/shell/btcpay.php"
             overwrite="true" />
     </target>
 </project>

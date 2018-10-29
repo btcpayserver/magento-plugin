@@ -1,15 +1,15 @@
 {
-    "name": "bitpay/magento-plugin",
-    "description": "Bitcoin payment module using the bitpay.com service",
+    "name": "btcpay/magento-plugin",
+    "description": "Bitcoin payment module using the btcpay.com service",
     "keywords": ["magento","bitcoin", "bitcoin cash"],
     "minimum-stability": "stable",
     "type": "magento-plugin",
-    "homepage": "https://github.com/bitpay/magento-plugin",
+    "homepage": "https://github.com/btcpayserver/magento-plugin",
     "license": "MIT",
     "support": {
-        "email": "support@bitpay.com",
-        "issues": "https://github.com/bitpay/magento-plugin/issues",
-        "source": "https://github.com/bitpay/magento-plugin"
+        "email": "support@btcpay.com",
+        "issues": "https://github.com/btcpayserver/magento-plugin/issues",
+        "source": "https://github.com/btcpayserver/magento-plugin"
     },
     "require": {
          "bitpay/php-client": "~2.2"

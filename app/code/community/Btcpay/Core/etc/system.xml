@@ -1,0 +1,254 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @license Copyright 2011-2014 BItPay Inc., MIT License
+ * @see https://github.com/bitpay/magento-plugin/blob/master/LICENSE
+ */
+ -->
+<config>
+    <sections>
+        <payment>
+            <groups>
+                <btcpay translate="label" module="btcpay">
+                    <label>Btcpay</label>
+                    <sort_order>670</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <header>
+                            <label>BTCPay</label>
+                            <frontend_class>complex</frontend_class>
+                            <frontend_model>btcpay/adminhtml_system_config_form_field_header</frontend_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </header>
+                        <pairing_code translate="label">
+                            <label>Pairing Code</label>
+                            <comment>
+                                <![CDATA[You must first create a pairing code for your BTCPay Merchant account.]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>btcpay/config_pairingCode</backend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </pairing_code>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <comment>
+                                <![CDATA[This is the payment method name your customers will see during checkout.]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <network translate="label">
+                            <label>BtcPayServer Url</label>
+                            <comment>
+                                <![CDATA[A BtcPayServer host url]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </network>
+                        <debug translate="label">
+                            <label>Debug</label>
+                            <comment>
+                                <![CDATA[By enabling this, it will output more verbose information in log files.]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </debug>
+                        <notification_url translate="label">
+                            <label>Notification URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </notification_url>
+                        <redirect_url translate="label">
+                            <label>Redirect URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </redirect_url>
+                        <failure_url translate="label">
+                            <label>Failure URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </failure_url>
+                        
+
+                        <invoice>
+                            <label>Invoice Settings</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </invoice>
+                        <invoice_paid translate="label">
+                            <label>Paid</label>
+                            <comment>
+                                <![CDATA[An invoice is considered "paid" when the Bitcoin network sees a transaction.]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>71</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </invoice_paid>
+                        <invoice_confirmed translate="label">
+                            <label>Confirmed</label>
+                            <comment>
+                                <![CDATA[A confirmed invoice means that the Bitcoin network has approved the transaction.]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>72</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </invoice_confirmed>
+                        <invoice_complete translate="label">
+                            <label>Complete</label>
+                            <comment>
+                                <![CDATA[A completed BTCPay invoice indicates the payment for the invoice has been fully confirmed by the Bitcoin network and the funds have been deposited into your BTCPay Merchant account.]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>73</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </invoice_complete>
+                        
+                        <speed translate="label">
+                            <label>Transaction Speed</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>btcpay/transactionSpeed</source_model>
+                            <sort_order>74</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>
+                                <![CDATA[Determines when a BTCPay payment confirmation is sent.<br /><strong>High:</strong> an invoice is confirmed immediately when payment received.<br /><strong>Medium:</strong> an invoice is confirmed after 1 block confirmation by the Bitcoin network (~10 mins).<br /><strong>Low:</strong> an invoice is confirmed after 6 block confirmations by the Bitcoin network (~1 hour).<br />The default and safest setting is "Low".  A "High" setting is quicker to generate a payment confirmation but is riskier since the transaction could have not been officially confirmed by the Bitcoin network itself.]]>
+                            </comment>
+                        </speed>
+
+                        <order_confirmation translate="label">
+                            <label>Send Magento order confirmation email</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_confirmation>
+
+                      <mage_settings_heading>
+                            <label>Magento Specific Settings</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>75</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </mage_settings_heading>
+                        <allowspecific translate="label">
+                            <label>Payment from Applicable Countries</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <sort_order>76</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Payment from Specific Countries</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>77</sort_order>
+                            <source_model>btcpay/specificCountry</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </specificcountry>
+                        <min_order_total translate="label">
+                            <label>Minimum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </min_order_total>
+                        <max_order_total translate="label">
+                            <label>Maximum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </max_order_total>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>99</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_class>validate-number</frontend_class>
+                        </sort_order>
+                        
+                        <requirements>
+                            <label>Requirements</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <comment>
+                                <![CDATA[This extension will not function if you do not meet the system requirements.]]>
+                            </comment>
+                            <sort_order>500</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </requirements>
+                        <has_openssl>
+                            <label>OpenSSL</label>
+                            <php_extension>openssl</php_extension>
+                            <frontend_model>btcpay/adminhtml_system_config_form_field_extension</frontend_model>
+                            <sort_order>510</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </has_openssl>
+                    </fields>
+                </btcpay>
+            </groups>
+        </payment>
+    </sections>
+</config>

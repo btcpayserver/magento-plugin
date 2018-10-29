@@ -31,7 +31,7 @@ class MagentoStorage implements StorageInterface
         if (true === isset($config) && false === empty($config)) {
             $config->saveConfig($key->getId(), $encryptedData);
         } else {
-            \Mage::helper('bitpay')->debugData('[ERROR] In file lib/Bitpay/Storage/MagentoStorage.php, class MagentoStorage::persist - Could not instantiate a \Mage_Core_Model_Config object.');
+            \Mage::helper('btcpay')->debugData('[ERROR] In file lib/Bitpay/Storage/MagentoStorage.php, class MagentoStorage::persist - Could not instantiate a \Mage_Core_Model_Config object.');
             throw new \Exception('[ERROR] In file lib/Bitpay/Storage/MagentoStorage.php, class MagentoStorage::persist - Could not instantiate a \Mage_Core_Model_Config object.');
         }
     }
@@ -51,18 +51,18 @@ class MagentoStorage implements StorageInterface
          * Not in database
          */
         if (false === isset($entity) || true === empty($entity)) {
-            \Mage::helper('bitpay')->debugData('[INFO] Call to MagentoStorage::load($id) with the id of ' . $id . ' did not return the store config parameter because it was not found in the database.');
+            \Mage::helper('btcpay')->debugData('[INFO] Call to MagentoStorage::load($id) with the id of ' . $id . ' did not return the store config parameter because it was not found in the database.');
             throw new \Exception('[INFO] Call to MagentoStorage::load($id) with the id of ' . $id . ' did not return the store config parameter because it was not found in the database.');
         }
 
         $decodedEntity = unserialize(\Mage::helper('core')->decrypt($entity));
 
         if (false === isset($decodedEntity) || true === empty($decodedEntity)) {
-            \Mage::helper('bitpay')->debugData('[INFO] Call to MagentoStorage::load($id) with the id of ' . $id . ' could not decrypt & unserialize the entity ' . $entity . '.');
+            \Mage::helper('btcpay')->debugData('[INFO] Call to MagentoStorage::load($id) with the id of ' . $id . ' could not decrypt & unserialize the entity ' . $entity . '.');
             throw new \Exception('[INFO] Call to MagentoStorage::load($id) with the id of ' . $id . ' could not decrypt & unserialize the entity ' . $entity . '.');
         }
 
-        \Mage::helper('bitpay')->debugData('[INFO] Call to MagentoStorage::load($id) with the id of ' . $id . ' successfully decrypted & unserialized the entity ' . $entity . '.');
+        \Mage::helper('btcpay')->debugData('[INFO] Call to MagentoStorage::load($id) with the id of ' . $id . ' successfully decrypted & unserialized the entity ' . $entity . '.');
 
         return $decodedEntity;
     }

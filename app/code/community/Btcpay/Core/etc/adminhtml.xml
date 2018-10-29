@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @license Copyright 2011-2014 BitPay Inc., MIT License
+ * @see https://github.com/bitpay/magento-plugin/blob/master/LICENSE
+ */
+ -->
+ <config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <btcpay translate="title" module="btcpay">
+                        <title>BtcPayServer</title>
+                    </btcpay>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <btcpay translate="title" module="btcpay">
+                                        <title>BtcPayServer Settings</title>
+                                    </btcpay>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <layout>
+        <updates>
+            <btcpay>
+                <file>btcpay.xml</file>
+            </btcpay>
+        </updates>
+    </layout>
+    <translate>
+        <modules>
+            <btcpay>
+                <files>
+                    <default>Btcpay_Core.csv</default>
+                </files>
+            </btcpay>
+        </modules>
+    </translate>
+ </config>
