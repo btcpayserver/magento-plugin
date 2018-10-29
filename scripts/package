@@ -15,7 +15,7 @@ $version    = '2.1.20';
 $vendorDir  = __DIR__ . '/../vendor';
 $distDir    = __DIR__ . '/../build/dist';
 $tmpDistDir = $distDir . '/tmp'; // Files will be placed here temporarly so we can zip/tar them.
-$distFile   = $distDir . '/Bitpay_Core-'.$version; // Without extension
+$distFile   = $distDir . '/Btcpay_Core-'.$version; // Without extension
 
 require_once $vendorDir . '/autoload.php';
 
@@ -51,92 +51,12 @@ foreach ($finder as $file) {
 }
 $filesystem->mirror('app/', sprintf('%s/app/', $tmpDistDir));
 $filesystem->mirror('lib/', sprintf('%s/lib/', $tmpDistDir));
-$filesystem->copy('LICENSE', sprintf('%s/app/code/community/Bitpay/Core/LICENSE', $tmpDistDir));
-$filesystem->copy('README.md', sprintf('%s/app/code/community/Bitpay/Core/README.md', $tmpDistDir));
+$filesystem->copy('LICENSE', sprintf('%s/app/code/community/BTCpay/Core/LICENSE', $tmpDistDir));
+$filesystem->copy('README.md', sprintf('%s/app/code/community/BTCpay/Core/README.md', $tmpDistDir));
 
 // All required files are in the temp. distribution directory
 
-/**
- * Need to create the package.xml file required by Magento
- */
-$xml = simplexml_load_string('<package/>');
-$xml->addChild('name', 'Bitpay_Core');
-$xml->addChild('version', $version);
-$xml->addChild('stability', 'stable');
-$xml->addChild('license', 'MIT')
-    ->addAttribute('uri', 'https://github.com/bitpay/magento-plugin/blob/master/LICENSE');
-$xml->addChild('channel', 'community');
-$xml->addChild('extends');
-$xml->addChild('summary', 'Accept Bitcoin and Bitcoin Cash on your Magento-based e-commerce site via BitPay.');
-$xml->addChild('description', 'Use BitPays plugin to accept Bitcoin and Bitcoin Cash payments from customers anywhere on earth.  You do not need to worry about bitcoin as a currency, because the plugin uses your local currency to create a BitPay invoice. BitPay will instantly update the Magento order status once the bitcoin payment has been received.');
-$xml->addChild('notes', 'Full support for Magento 1.9');
-
-$authorsNode = $xml->addChild('authors');
-
-$authors = array(
-    array(
-        'Integrations Team', // Name
-        'BitPayInc', // Magento Connect Username
-        'support@bitpay.com', // Email
-    ),
-);
-
-foreach ($authors as $author) {
-    $authorNode = $authorsNode->addChild('author');
-    $authorNode->addChild('name', $author[0]);
-    $authorNode->addChild('user', $author[1]);
-    $authorNode->addChild('email', $author[2]);
-}
-
-$xml->addChild('date', date('Y-m-d'));
-$xml->addChild('time', date('G:i:s'));
-$xml->addChild('compatible');
-$xml->addChild('dependencies');
-
-$requiredNode = $xml->addChild('required', 'php');
-$requiredNode->addAttribute('php_min', '5.4.0');
-$requiredNode->addAttribute('php_max', '7.2.0');
-
-$extensionsNode = $xml->addChild('extensions');
-
-foreach (array('openssl', 'mcrypt') as $ext) {
-    $extNode = $extensionsNode->addChild('name', $ext);
-    $extNode->addChild('min');
-    $extNode->addChild('max');
-}
-
-$targetNode = $xml->addChild('contents')->addChild('target');
-$targetNode->addAttribute('name', 'mage');
-
-$finder = new \Symfony\Component\Finder\Finder();
-$finder
-    ->files()
-    ->in($tmpDistDir);
-
-foreach ($finder as $file) {
-    $node        = $targetNode;
-    $directories = explode('/', $file->getRelativePathname());
-    $filename    = array_pop($directories);
-
-    for ($i = 1; $i <= count($directories); $i++) {
-        $dir   = $directories[$i - 1];
-        $nodes = $node->xpath('dir[@name="' . $dir . '"]');
-        if (count($nodes)) {
-            $node = array_pop($nodes);
-        } else {
-            $node = $node->addChild('dir');
-            $node->addAttribute('name', $dir);
-        }
-    }
-
-    $fileNode = $node->addChild('file');
-    $fileNode->addAttribute('name', $file->getBaseName());
-    $fileNode->addAttribute('hash', md5_file($file->getRealPath()));
-}
-
-$xml->asXml($tmpDistDir . '/package.xml');
-
-// package.xml created, just need to tar/zip everything
+// Just need to tar/zip everything
 $filesystem->remove($distFile.'.zip');
 $filesystem->remove($distFile.'.tgz');
 
